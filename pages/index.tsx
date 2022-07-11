@@ -1,7 +1,22 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import { useState, useEffect } from "react";
+import Grid from "./components/grid";
 
 const Home: NextPage = () => {
+  const [attempts, setAttempts] = useState<string[][]>([]);
+
+  useEffect(() => {
+    let word = [" ", " ", " ", " ", " "];
+
+    let genAttempts = new Array<string[]>(5);
+
+    for (let i = 0; i < genAttempts.length; i++) {
+      genAttempts[i] = word;
+    }
+    setAttempts(genAttempts);
+  }, []);
+
   return (
     <div>
       <Head>
@@ -10,9 +25,10 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="main flex justify-center items-center bg-slate-600 h-screen">
-        <div className="container max-w-screen-lg">
-          <h1 className="title">Worldle</h1>
+      <div className="main flex justify-center items-center bg-slate-600 h-screen w-full">
+        <div className="container max-w-screen-lg h-full flex justify-center items-center flex-col">
+          <h1 className="title text-center text-3xl font-semibold">Wordle</h1>
+          <Grid attempts={attempts} />
         </div>
       </div>
     </div>
