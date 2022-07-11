@@ -11,7 +11,9 @@ const Home: NextPage = () => {
       </Head>
 
       <div className="main flex justify-center items-center bg-slate-600 h-screen">
-        <div className="container max-w-screen-lg"></div>
+        <div className="container max-w-screen-lg">
+          <h1 className="title">Worldle</h1>
+        </div>
       </div>
     </div>
   );
