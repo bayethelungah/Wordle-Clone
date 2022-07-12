@@ -1,27 +1,40 @@
-import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 type Props = {
-  attempts: string[][];
+  attempts: string[];
+  currentAttempt: string;
 };
 
-const Box = () => {
+type BoxProps = {
+  word: string;
+};
+
+const Box = (props: BoxProps) => {
   return (
-    <div className="box">
-      <h1>{}</h1>
-    </div>
+    <>
+      {props.word.split("").map((letter) => {
+        return (
+          <motion.div
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="box flex justify-center items-center"
+          >
+            <h1 className="text-3xl text-center text-white">{letter}</h1>
+          </motion.div>
+        );
+      })}
+    </>
   );
 };
 
 const grid = (props: Props) => {
   return (
-    <div className="flex justify-center items-center flex-col gap-2">
+    <div className="grid grid-cols-5 gap-1">
       {props.attempts.map((word, id) => {
         return (
-          <div key={id} className="flex justify-content items-center gap-2">
-            {word.map((letter) => {
-              return <div className="box">{letter}</div>;
-            })}
-          </div>
+          <AnimatePresence>
+            <Box word={word} key={id} />
+          </AnimatePresence>
         );
       })}
     </div>
